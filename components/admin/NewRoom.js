@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
-import ButtonLoader from '../layout/ButtonLoader'
+import ButtonLoader from '../layout/ButtonLoader';
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
-import { newRoom, clearErrors } from '../../redux/actions/roomActions'
-import { NEW_ROOM_RESET } from '../../redux/constants/roomConstants'
+import { newRoom, clearErrors } from '../../redux/actions/roomActions';
+import { NEW_ROOM_RESET } from '../../redux/constants/roomConstants';
 
 const NewRoom = () => {
 
@@ -42,7 +42,7 @@ const NewRoom = () => {
             dispatch({ type: NEW_ROOM_RESET })
         }
 
-    }, [dispatch, error, success])
+    }, [dispatch, error, success]);
 
     const submitHandler = (e) => {
         e.preventDefault()
