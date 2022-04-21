@@ -22,7 +22,6 @@ import {
 } from '../constants/bookingConstants'
 
 
-// Check Booking
 export const checkBookingReducer = (state = { available: null }, action) => {
     switch (action.type) {
 
@@ -61,7 +60,7 @@ export const checkBookingReducer = (state = { available: null }, action) => {
 }
 
 
-// Get all booked dates
+
 export const bookedDatesReducer = (state = { dates: [] }, action) => {
     switch (action.type) {
         case BOOKED_DATES_SUCCESS:

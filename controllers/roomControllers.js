@@ -11,7 +11,7 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-// Create all rooms   =>   /api/rooms
+
 const allRooms = catchAsyncErrors(async (req, res) => {
 
     const resPerPage = 5;
@@ -69,7 +69,6 @@ const newRoom = catchAsyncErrors(async (req, res) => {
     })
 })
 
-// Get room details   =>   /api/rooms/:id
 const getSingleRoom = catchAsyncErrors(async (req, res, next) => {
 
     const room = await Room.findById(req.query.id);
@@ -85,7 +84,6 @@ const getSingleRoom = catchAsyncErrors(async (req, res, next) => {
 })
 
 
-// Update room details   =>   /api/rooms/:id
 const updateRoom = catchAsyncErrors(async (req, res) => {
 
     let room = await Room.findById(req.query.id);
@@ -96,7 +94,6 @@ const updateRoom = catchAsyncErrors(async (req, res) => {
 
     if (req.body.images) {
 
-        // Delete images associated with the room
         for (let i = 0; i < room.images.length; i++) {
             await cloudinary.v2.uploader.destroy(room.images[i].public_id)
         }
@@ -135,7 +132,7 @@ const updateRoom = catchAsyncErrors(async (req, res) => {
 })
 
 
-// Delete room   =>   /api/rooms/:id
+
 const deleteRoom = catchAsyncErrors(async (req, res) => {
 
     const room = await Room.findById(req.query.id);
@@ -144,7 +141,6 @@ const deleteRoom = catchAsyncErrors(async (req, res) => {
         return next(new ErrorHandler('Room not found with this ID', 404))
     }
 
-    // Delete images associated with the room
     for (let i = 0; i < room.images.length; i++) {
         await cloudinary.v2.uploader.destroy(room.images[i].public_id)
     }
@@ -159,7 +155,6 @@ const deleteRoom = catchAsyncErrors(async (req, res) => {
 })
 
 
-// Create a new review   =>   /api/reviews
 const createRoomReview = catchAsyncErrors(async (req, res) => {
 
     const { rating, comment, roomId } = req.body;
@@ -202,7 +197,6 @@ const createRoomReview = catchAsyncErrors(async (req, res) => {
 })
 
 
-// Check Review Availability   =>   /api/reviews/check_review_availability
 const checkReviewAvailability = catchAsyncErrors(async (req, res) => {
 
     const { roomId } = req.query;
@@ -221,7 +215,6 @@ const checkReviewAvailability = catchAsyncErrors(async (req, res) => {
 })
 
 
-// Get all rooms - ADMIN   =>   /api/admin/rooms
 const allAdminRooms = catchAsyncErrors(async (req, res) => {
 
     const rooms = await Room.find();
@@ -234,7 +227,6 @@ const allAdminRooms = catchAsyncErrors(async (req, res) => {
 })
 
 
-// Get all room reviews - ADMIN   =>   /api/reviews
 const getRoomReviews = catchAsyncErrors(async (req, res) => {
 
     const room = await Room.findById(req.query.id);
@@ -247,7 +239,6 @@ const getRoomReviews = catchAsyncErrors(async (req, res) => {
 })
 
 
-// Delete room review - ADMIN   =>   /api/reviews
 const deleteReview = catchAsyncErrors(async (req, res) => {
 
     const room = await Room.findById(req.query.roomId);

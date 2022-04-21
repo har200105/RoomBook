@@ -8,7 +8,6 @@ const bindMiddlware = (middlware) => {
         const { composeWithDevTools } = require('redux-devtools-extension')
         return composeWithDevTools(applyMiddleware(...middlware))
     }
-
     return applyMiddleware(...middlware)
 }
 

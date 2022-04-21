@@ -223,7 +223,6 @@ const NewRoom = () => {
                                 AC
                      </label>
                         </div>
-
                         <div className="form-check">
                             <input
                                 className="form-check-input"

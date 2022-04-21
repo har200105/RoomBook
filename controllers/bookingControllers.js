@@ -6,9 +6,8 @@ import catchAsyncErrors from '../middlewares/catchAsyncErrors'
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
 
-const moment = extendMoment(Moment)
+const moment = extendMoment(Moment);
 
-// Create new Booking   =>   /api/bookings
 const newBooking = catchAsyncErrors(async (req, res) => {
 
     const {
@@ -29,7 +28,7 @@ const newBooking = catchAsyncErrors(async (req, res) => {
         amountPaid,
         paymentInfo,
         paidAt: Date.now()
-    })
+    });
 
     res.status(200).json({
         success: true,
@@ -38,7 +37,6 @@ const newBooking = catchAsyncErrors(async (req, res) => {
 
 })
 
-// Create new booking   =>   /api/bookings/check
 const checkRoomBookingAvailability = catchAsyncErrors(async (req, res) => {
 
     let { roomId, checkInDate, checkOutDate } = req.query;
@@ -59,7 +57,7 @@ const checkRoomBookingAvailability = catchAsyncErrors(async (req, res) => {
         }]
     })
 
-    // Check if there is any booking available
+
     let isAvailable;
 
     if (bookings && bookings.length === 0) {
@@ -75,7 +73,7 @@ const checkRoomBookingAvailability = catchAsyncErrors(async (req, res) => {
 })
 
 
-// Check booked dates of a room   =>   /api/bookings/check_booked_dates
+
 const checkBookedDatesOfRoom = catchAsyncErrors(async (req, res) => {
 
     const { roomId } = req.query;
@@ -104,7 +102,7 @@ const checkBookedDatesOfRoom = catchAsyncErrors(async (req, res) => {
 })
 
 
-// Get all bookings of current user   =>   /api/bookings/me
+
 const myBookings = catchAsyncErrors(async (req, res) => {
 
     const bookings = await Booking.find({ user: req.user._id })
@@ -115,16 +113,17 @@ const myBookings = catchAsyncErrors(async (req, res) => {
         .populate({
             path: 'user',
             select: 'name email'
-        })
+        });
 
     res.status(200).json({
         success: true,
         bookings
-    })
+    });
+
 })
 
 
-// Get booking details   =>   /api/bookings/:id
+
 const getBookingDetails = catchAsyncErrors(async (req, res) => {
 
     const booking = await Booking.findById(req.query.id)
@@ -144,7 +143,7 @@ const getBookingDetails = catchAsyncErrors(async (req, res) => {
 })
 
 
-// Get all bookings - ADMIN   =>   /api/admin/bookings
+
 const allAdminBookings = catchAsyncErrors(async (req, res) => {
 
     const bookings = await Booking.find()
@@ -164,7 +163,7 @@ const allAdminBookings = catchAsyncErrors(async (req, res) => {
 })
 
 
-// Delete booking - ADMIN   =>   /api/admin/bookings/id
+
 const deleteBooking = catchAsyncErrors(async (req, res, next) => {
 
     const booking = await Booking.findById(req.query.id)

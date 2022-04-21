@@ -13,8 +13,8 @@ import { DELETE_ROOM_RESET } from '../../redux/constants/roomConstants'
 
 const AllRooms = () => {
 
-    const dispatch = useDispatch()
-    const router = useRouter()
+    const dispatch = useDispatch();
+    const router = useRouter();
 
     const { loading, error, rooms } = useSelector(state => state.allRooms)
     const { error: deleteError, isDeleted } = useSelector(state => state.room)
@@ -29,7 +29,7 @@ const AllRooms = () => {
         }
 
         if (deleteError) {
-            toast.erroe(deleteError);
+            toast.error(deleteError);
             dispatch(clearErrors())
         }
 
@@ -107,17 +107,16 @@ const AllRooms = () => {
 
     return (
         <div className='container container-fluid'>
-            {loading ? <Loader /> :
+            {
+                loading ? <Loader /> :
                 <>
                     <h1 className='my-5'>{`${rooms && rooms.length} Rooms`}
-
                         <Link href='/admin/rooms/new'>
-                            <a className="mt-0 btn text-white float-right new-room-btn">Create Room</a>
+                            <a className="mt-0 btn text-white float-right new-room-btn">
+                                Create Room
+                            </a>
                         </Link>
-
                     </h1>
-
-
                     <MDBDataTable
                         data={setRooms()}
                         className='px-3'
@@ -126,7 +125,6 @@ const AllRooms = () => {
                         hover
                         noBottomColumns={true}
                     />
-
                 </>
             }
         </div>

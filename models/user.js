@@ -37,7 +37,10 @@ const userSchema = new mongoose.Schema({
     },
     verified: {
         type: Boolean,
-        default:false  
+        default: false
+    },
+    verifyUserToken: {
+        type:String
     },
     createdAt: {
         type: Date,
@@ -45,14 +48,14 @@ const userSchema = new mongoose.Schema({
     },
     resetPasswordToken: String,
     resetPasswordExpire: Date
-})
+
+});
 
 
 userSchema.pre('save', async function (next) {
     if (!this.isModified('password')) {
-        next()
+        next();
     }
-
     this.password = await bcrypt.hash(this.password, 10)
 });
 

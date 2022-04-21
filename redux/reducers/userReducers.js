@@ -35,7 +35,7 @@ import {
 } from '../constants/userConstants'
 
 
-// Auth reducer
+
 export const authReducer = (state = { user: null }, action) => {
     switch (action.type) {
 
@@ -68,7 +68,7 @@ export const authReducer = (state = { user: null }, action) => {
 }
 
 
-// Load user reducer
+
 export const loadedUserReducer = (state = { loading: true, user: null }, action) => {
     switch (action.type) {
 
@@ -104,7 +104,7 @@ export const loadedUserReducer = (state = { loading: true, user: null }, action)
 }
 
 
-// User reducer
+
 export const userReducer = (state = {}, action) => {
     switch (action.type) {
 

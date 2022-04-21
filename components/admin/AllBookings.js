@@ -113,31 +113,30 @@ const AllBookings = () => {
 
     const downloadInvoice = async (booking) => {
 
-        const data = {
-            "documentTitle": "Booking INVOICE", //Defaults to INVOICE
-            "currency": "USD",
-            "taxNotation": "vat", //or gst
+   const data = {
+            "documentTitle": "Room Booking INVOICE",
+            "currency": "inr",
+            "taxNotation": "gst", 
             "marginTop": 25,
             "marginRight": 25,
             "marginLeft": 25,
             "marginBottom": 25,
-            "logo": "https://res.cloudinary.com/bookit/image/upload/v1617904918/bookit/bookit_logo_cbgjzv.png",
             "sender": {
-                "company": "Book IT",
-                "address": "13th Street. 47 W 13th St",
-                "zip": "10001",
-                "city": "New York",
-                "country": "United States"
+                "company": "BookRoom",
+                "address": "PDPU Road,Raysan",
+                "zip": "382007",
+                "city": "Gandhinagar",
+                "country": "India"
             },
             "client": {
                 "company": `${booking.user.name}`,
                 "address": `${booking.user.email}`,
                 "zip": "",
-                "city": `Check In: ${new Date(booking.checkInDate).toLocaleString('en-US')}`,
-                "country": `Check In: ${new Date(booking.checkOutDate).toLocaleString('en-US')}`
+                "city": `Check In: ${new Date(booking.checkInDate).toLocaleString()}`,
+                "country": `Check In: ${new Date(booking.checkOutDate).toLocaleString()}`
             },
             "invoiceNumber": `${booking._id}`,
-            "invoiceDate": `${new Date(Date.now()).toLocaleString('en-US')}`,
+            "invoiceDate": `${new Date(Date.now()).toLocaleString()}`,
             "products": [
                 {
                     "quantity": `${booking.daysOfStay}`,
@@ -146,12 +145,10 @@ const AllBookings = () => {
                     "price": booking.room.pricePerNight
                 }
             ],
-            "bottomNotice": "This is auto generated Invoice of your booking on Book IT."
+            "bottomNotice": "This is auto generated Invoice of your booking on Book Room."
         };
-
         const result = await easyinvoice.createInvoice(data);
-        easyinvoice.download(`invoice_${booking._id}.pdf`, result.pdf)
-
+        easyinvoice.download(`invoice_${booking._id}.pdf`, result.pdf);
     }
 
 

@@ -107,7 +107,7 @@ const MyBookings = () => {
                 "country": `Check In: ${new Date(booking.checkOutDate).toLocaleString()}`
             },
             "invoiceNumber": `${booking._id}`,
-            "invoiceDate": `${new Date(Date.now()).toLocaleString('en-US')}`,
+            "invoiceDate": `${new Date(Date.now()).toLocaleString()}`,
             "products": [
                 {
                     "quantity": `${booking.daysOfStay}`,

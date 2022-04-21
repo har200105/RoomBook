@@ -38,7 +38,7 @@ import {
 } from '../constants/roomConstants'
 
 
-// All rooms reducer
+
 export const allRoomsReducer = (state = { rooms: [] }, action) => {
     switch (action.type) {
 
@@ -78,7 +78,7 @@ export const allRoomsReducer = (state = { rooms: [] }, action) => {
     }
 }
 
-// Room details reducer
+
 export const roomDetailsReducer = (state = { room: {} }, action) => {
     switch (action.type) {
         case ROOM_DETAILS_SUCCESS:
