@@ -20,27 +20,51 @@ cloudinary.config({
 const registerUser = catchAsyncErrors(async (req, res) => {
 
     const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-        folder: 'bookit/avatars',
+        folder: 'shiddat',
         width: '150',
         crop: 'scale'
-    })
+    });
 
     const { name, email, password } = req.body;
 
-    const user = await User.create({
-        name,
-        email,
-        password,
-        avatar: {
-            public_id: result.public_id,
-            url: result.secure_url
-        }
-    });
+     const resetToken = crypto.randomBytes(20).toString('hex')
+     const resetUrl = `${origin}/user/verify/${resetToken}`;
+     const message = `Your email verify url is as follow: \n\n ${resetUrl}`;
 
-    res.status(200).json({
-        success: true,
-        message: 'Account Registered successfully'
-    })
+    try {
+        
+        await sendEmail({
+            email,
+            subject: 'RoomBook Email Verification',
+            message
+        });
+
+    
+
+        const user = await User.create({
+            name,
+            email,
+            password,
+            verified: false,
+            avatar: {
+                public_id: result.public_id,
+                url: result.secure_url
+            },
+            verifyUserToken: resetToken
+        });
+
+
+        res.status(200).json({
+            success: true,
+            message: 'Account Registered successfully'
+        });
+    }
+
+    catch (error) {
+        user.verifyUserToken = undefined;
+        await user.save({ validateBeforeSave: false });
+        return next(new ErrorHandler(error.message, 500))
+    }
 
 });
 
@@ -51,15 +75,12 @@ const verifyUser = catchAsyncErrors(async (req, res) => {
 
 
 const currentUserProfile = catchAsyncErrors(async (req, res) => {
-
     const user = await User.findById(req.user._id);
-
     res.status(200).json({
         success: true,
         user
-    })
-
-})
+    });
+});
 
 const updateProfile = catchAsyncErrors(async (req, res) => {
 
@@ -114,14 +135,14 @@ const forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
     const { origin } = absoluteUrl(req);
 
-    const resetUrl = `${origin}/password/reset/${resetToken}`
+    const resetUrl = `${origin}/password/reset/${resetToken}`;
 
     const message = `Your password reset url is as follow: \n\n ${resetUrl} \n\n\ If you have not requested this email, then ignore it.`
 
     try {
         await sendEmail({
             email: user.email,
-            subject: 'BookIT Password Recovery',
+            subject: 'RoomBook Password Recovery',
             message
         })
 

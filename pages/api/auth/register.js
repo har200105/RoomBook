@@ -9,6 +9,7 @@ const handler = nc({ onError });
 
 dbConnect();
 
-handler.post(registerUser)
+handler.post(registerUser);
+
 
 export default handler;
