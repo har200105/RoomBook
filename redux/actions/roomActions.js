@@ -36,7 +36,6 @@ import {
 
 } from '../constants/roomConstants'
 
-// Get all rooms
 export const getRooms = (req, currentPage = 1, location = '', guests, category) => async (dispatch) => {
     try {
 
@@ -63,7 +62,6 @@ export const getRooms = (req, currentPage = 1, location = '', guests, category) 
 }
 
 
-// Get room details
 export const getRoomDetails = (req, id) => async (dispatch) => {
     try {
 
@@ -93,7 +91,6 @@ export const getRoomDetails = (req, id) => async (dispatch) => {
 }
 
 
-// Get all rooms - ADMIN
 export const getAdminRooms = () => async (dispatch) => {
     try {
 
@@ -281,9 +278,9 @@ export const deleteReview = (id, roomId) => async (dispatch) => {
 }
 
 
-// Clear Errors
+
 export const clearErrors = () => async (dispatch) => {
     dispatch({
         type: CLEAR_ERRORS
-    })
+    });
 }

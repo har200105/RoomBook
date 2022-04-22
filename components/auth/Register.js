@@ -16,19 +16,19 @@ const Register = () => {
         name: '',
         email: '',
         password: ''
-    })
+    });
 
     const { name, email, password } = user
 
     const [avatar, setAvatar] = useState('');
     const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg');
 
-    const { success, error, loading } = useSelector(state => state.auth)
+    const { success, error, loading } = useSelector((state) => state.auth);
 
     useEffect(() => {
 
         if (success) {
-            router.push('/login')
+            router.push('/login');
         }
 
         if (error) {
@@ -36,7 +36,7 @@ const Register = () => {
             dispatch(clearErrors())
         }
 
-    }, [dispatch, success, error])
+    }, [dispatch, success, error]);
 
 
     const submitHandler = (e) => {
@@ -44,9 +44,9 @@ const Register = () => {
 
         const userData = {
             name, email, password, avatar
-        }
+        };
 
-        dispatch(registerUser(userData))
+        dispatch(registerUser(userData));
 
     }
 
@@ -66,7 +66,9 @@ const Register = () => {
             reader.readAsDataURL(e.target.files[0])
 
         } else {
-            setUser({ ...user, [e.target.name]: e.target.value })
+
+            setUser({ ...user, [e.target.name]: e.target.value });
+
         }
 
     }

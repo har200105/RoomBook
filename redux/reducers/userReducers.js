@@ -1,4 +1,5 @@
 import {
+
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
     REGISTER_USER_FAIL,
@@ -29,8 +30,10 @@ import {
     DELETE_USER_SUCCESS,
     DELETE_USER_RESET,
     DELETE_USER_FAIL,
-
-    CLEAR_ERRORS
+    CLEAR_ERRORS,
+    VERIFY_USER_REQUEST,
+    VERIFY_USER_SUCCESS,
+     VERIFY_USER_FAILURE
 
 } from '../constants/userConstants'
 
@@ -249,6 +252,40 @@ export const userDetailsReducer = (state = { user: {} }, action) => {
             }
 
         case USER_DETAILS_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
+
+
+
+export const userVerifyReducer = (state = { success: false }, action) => {
+    switch (action.type) {
+
+        case VERIFY_USER_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+
+        case VERIFY_USER_SUCCESS:
+            return {
+                loading: false,
+                success: action.payload
+            }
+
+        case VERIFY_USER_FAILURE:
             return {
                 loading: false,
                 error: action.payload

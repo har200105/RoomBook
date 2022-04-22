@@ -17,7 +17,7 @@ cloudinary.config({
 
 
 
-const registerUser = catchAsyncErrors(async (req, res) => {
+const registerUser = catchAsyncErrors(async (req, res,next) => {
 
     const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
         folder: 'shiddat',
@@ -27,8 +27,9 @@ const registerUser = catchAsyncErrors(async (req, res) => {
 
     const { name, email, password } = req.body;
 
-     const resetToken = crypto.randomBytes(20).toString('hex')
-     const resetUrl = `${origin}/user/verify/${resetToken}`;
+    const resetToken = crypto.randomBytes(20).toString('hex');
+    const { origin } = absoluteUrl(req);
+     const resetUrl = `${origin}/auth/verify/${resetToken}`;
      const message = `Your email verify url is as follow: \n\n ${resetUrl}`;
 
     try {
@@ -61,16 +62,32 @@ const registerUser = catchAsyncErrors(async (req, res) => {
     }
 
     catch (error) {
-        user.verifyUserToken = undefined;
-        await user.save({ validateBeforeSave: false });
         return next(new ErrorHandler(error.message, 500))
     }
 
 });
 
 
-const verifyUser = catchAsyncErrors(async (req, res) => {
+const verifyUser = catchAsyncErrors(async (req, res,next) => {
     
+
+    const user = await User.findOne({ verifyUserToken: req.query.token });
+    
+    if (!user) {
+        return next(new ErrorHandler('Invalid or Expired URL', 404));
+    }
+
+    await User.findOneAndUpdate({ verifyUserToken: req.query.token }, {
+        $set: {
+            verified: true,
+            verifyUserToken:null
+        }
+    }).then(() => {
+        res.status(201).json({ success: true, message: "User Verified Successfully" });
+    });
+
+
+
 });
 
 
@@ -218,7 +235,7 @@ const getUserDetails = catchAsyncErrors(async (req, res) => {
     res.status(200).json({
         success: true,
         user
-    })
+    });
 
 })
 
@@ -275,5 +292,6 @@ export {
     allAdminUsers,
     getUserDetails,
     updateUser,
-    deleteUser
+    deleteUser,
+    verifyUser
 }

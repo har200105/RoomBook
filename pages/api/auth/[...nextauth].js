@@ -22,6 +22,9 @@ export default NextAuth({
                 if (!user) {
                     throw new Error('Invalid Email or Password')
                 }
+                if (!user.verified) {
+                    throw new Error('Email not Verified yet')
+                }
                 const isPasswordMatched = await user.comparePassword(password);
                 if (!isPasswordMatched) {
                     throw new Error('Invalid Email or Password')

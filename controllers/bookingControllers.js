@@ -82,9 +82,9 @@ const checkBookedDatesOfRoom = catchAsyncErrors(async (req, res) => {
 
     let bookedDates = [];
 
-    const timeDiffernece = moment().utcOffset() / 60;
+    const timeDifference = moment().utcOffset() / 60;
 
-    bookings.forEach(booking => {
+    bookings.forEach((booking) => {
 
         const checkInDate = moment(booking.checkInDate).add(timeDiffernece, 'hours')
         const checkOutDate = moment(booking.checkOutDate).add(timeDiffernece, 'hours')
@@ -106,10 +106,12 @@ const checkBookedDatesOfRoom = catchAsyncErrors(async (req, res) => {
 const myBookings = catchAsyncErrors(async (req, res) => {
 
     const bookings = await Booking.find({ user: req.user._id })
+        
         .populate({
             path: 'room',
             select: 'name pricePerNight images'
         })
+
         .populate({
             path: 'user',
             select: 'name email'
