@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import ButtonLoader from '../../../components/layout/ButtonLoader'
 import { clearErrors, verifyUser } from '../../../redux/actions/userActions'
 import {useSelector,useDispatch} from 'react-redux'
+import Layout from '../../../components/layout/Layout'
 
 const Verify = () => {
 
@@ -27,18 +28,20 @@ const Verify = () => {
 
     useEffect(() => {
         if (success) {
+            toast.success("Account Verified Successfully");
             router.push(`/login`);
         }
         if (error) {
-            console.log(error)
-            toast.error(error.toString());
+            console.log(error);
+            toast.error(error);
              setLoading(false);
-            }
-            dispatch(clearErrors());
+        }
+          dispatch(clearErrors());  
     },[success,dispatch,error]);
 
 
     return (
+          <Layout title='User Verify'>
         <div className="container container-fluid">
             <div className="row wrapper">
                 <div className="col-10 col-lg-5">
@@ -55,7 +58,8 @@ const Verify = () => {
                     </form>
                 </div>
             </div>
-        </div>
+            </div>
+            </Layout>
     )
 }
 

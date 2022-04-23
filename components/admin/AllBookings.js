@@ -91,9 +91,9 @@ const AllBookings = () => {
                             </a>
                         </Link>
 
-                        <button className="btn btn-success mx-2" onClick={() => downloadInvoice(booking)}>
+                        {/* <button className="btn btn-success mx-2" onClick={() => downloadInvoice(booking)}>
                             <i className="fa fa-download"></i>
-                        </button>
+                        </button> */}
 
                         <button className="btn btn-danger mx-2" onClick={() => deleteBookingHandler(booking._id)}>
                             <i className="fa fa-trash"></i>
@@ -146,9 +146,10 @@ const AllBookings = () => {
                 }
             ],
             "bottomNotice": "This is auto generated Invoice of your booking on Book Room."
-        };
+   };
         const result = await easyinvoice.createInvoice(data);
-        easyinvoice.download(`invoice_${booking._id}.pdf`, result.pdf);
+        console.log(result);
+        easyinvoice.render(`invoice_${booking._id}.pdf`, result.pdf);
     }
 
 

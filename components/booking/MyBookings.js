@@ -61,7 +61,7 @@ const MyBookings = () => {
                 id: booking._id,
                 checkIn: new Date(booking.checkInDate).toLocaleString('en-US'),
                 checkOut: new Date(booking.checkOutDate).toLocaleString('en-US'),
-                amount: `$${booking.amountPaid}`,
+                amount: `₹${booking.amountPaid}`,
                 actions:
                     <>
                         <Link href={`/bookings/${booking._id}`}>
@@ -70,9 +70,9 @@ const MyBookings = () => {
                             </a>
                         </Link>
 
-                        <button className="btn btn-success mx-2" onClick={() => downloadInvoice(booking)}>
+                        {/* <button className="btn btn-success mx-2" onClick={() => downloadInvoice(booking)}>
                             <i className="fa fa-download"></i>
-                        </button>
+                        </button> */}
 
                     </>
             })

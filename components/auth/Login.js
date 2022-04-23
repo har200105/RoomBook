@@ -5,12 +5,15 @@ import { signIn } from 'next-auth/client'
 
 import { toast } from 'react-toastify'
 import ButtonLoader from '../layout/ButtonLoader'
+import { useRouter } from 'next/router'
 
 const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+
+    const router = useRouter();
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -21,14 +24,15 @@ const Login = () => {
             redirect: false,
             email,
             password
-        })
+        });
 
-        setLoading(false)
+        setLoading(false);
 
         if (result.error) {
             toast.error(result.error);
         } else {
-            window.location.href = '/'
+            toast.success("Login Successfull");
+            router.push(`/`);
         }
 
     }
