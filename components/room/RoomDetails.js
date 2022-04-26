@@ -37,7 +37,7 @@ const RoomDetails = () => {
     const { available, loading: bookingLoading } = useSelector(state => state.checkBooking);
 
     const excludedDates = []
-    dates.forEach(date => {
+    dates && dates.forEach(date => {
         excludedDates.push(new Date(date))
     })
 

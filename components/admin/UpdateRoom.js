@@ -108,7 +108,7 @@ const UpdateRoom = () => {
         setOldImages([]);
         setImagesPreview([]);
 
-        files.forEach(file => {
+        files && files.forEach(file => {
 
             const reader = new FileReader();
 

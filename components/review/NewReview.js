@@ -52,7 +52,7 @@ const NewReview = () => {
 
         const stars = document.querySelectorAll('.star');
 
-        stars.forEach((star, index) => {
+      stars  && stars.forEach((star, index) => {
             star.starValue = index + 1;
 
             ['click', 'mouseover', 'mouseout'].forEach(function (e) {
