@@ -14,7 +14,7 @@ module.exports = {
         SMTP_HOST: "",
         SMTP_PORT: "",
         SMTP_USER: "harshitrathi200105@gmail.com",
-        SMTP_PASSWORD: "kwjoyehfmxzzzugo",
+        SMTP_PASSWORD: "axljlumdzynyxtcy",
         SMTP_FROM_EMAIL: "harshitrathi200105@gmail.com",
         SMTP_FROM_NAME: "Harshit Rathi",
         NEXTAUTH_URL: "https://roombook.vercel.app/",
