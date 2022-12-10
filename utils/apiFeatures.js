@@ -20,13 +20,8 @@ class APIFeatures {
     filter() {
 
         const queryCopy = { ...this.queryStr }
-
-        // Remove fields from query
         const removeFields = ['location', 'page']
         removeFields.forEach(el => delete queryCopy[el]);
-
-
-        // Advance filtering with gt, gte etc
         let filterQuery = {};
         const fieldsLength = Object.keys(queryCopy).length;
 

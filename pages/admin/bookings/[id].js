@@ -12,11 +12,11 @@ const BookingDetailsPage = () => {
         <Layout title='Booking Details'>
             <BookingDetails />
         </Layout>
-    )
+    );
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(async ({ req, params, store }) => {
-    const session = await getSession({ req })
+    const session = await getSession({ req });
 
     if (!session || session.user.role !== 'admin') {
         return {

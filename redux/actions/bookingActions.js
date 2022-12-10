@@ -17,7 +17,6 @@ import {
     DELETE_BOOKING_REQUEST,
     DELETE_BOOKING_SUCCESS,
     DELETE_BOOKING_FAIL,
-
     CLEAR_ERRORS
 
 } from '../constants/bookingConstants'

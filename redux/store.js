@@ -1,6 +1,6 @@
 import { createStore , applyMiddleware } from 'redux';
 import { HYDRATE, createWrapper } from 'next-redux-wrapper'
-import thunkMiddleware from 'redux-thunk'
+import thunk from 'redux-thunk'
 import reducers from './reducers/reducers'
 
 const bindMiddlware = (middlware) => {
@@ -24,7 +24,7 @@ const reducer = (state, action) => {
 }
 
 const initStore = () => {
-    return createStore(reducer, bindMiddlware([thunkMiddleware]));
+    return createStore(reducer, bindMiddlware([thunk]));
 }
 
 export const wrapper = createWrapper(initStore);

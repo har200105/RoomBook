@@ -7,7 +7,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Scroll Bar */
 
 ::-webkit-scrollbar-track {
   background-color: #f5f5f5;
@@ -121,7 +120,6 @@ body {
   justify-content: center;
   align-items: center;
   margin-top: 5rem;
-
   font-weight: 700;
 }
 
@@ -137,7 +135,7 @@ body {
 #forgot_password_button,
 #new_password_button,
 .search-form .btn {
-   background: yellowgreen;
+  background: yellowgreen;
   border-color: #0ba1b5;
   color: white;
   margin-top: 2.5rem;
@@ -216,7 +214,7 @@ nav {
   color: white;
 }
 
-/* Home page */
+
 
 .stays-heading {
   font-weight: 700;
@@ -280,7 +278,6 @@ nav {
   margin-left: 0.5rem;
 }
 
-/* Ratings */
 
 .rating-outer {
   display: inline-block;
@@ -378,7 +375,6 @@ footer {
   width: 100%;
 }
 
-/* Stripe payment design */
 
 #stripe_pay_btn {
   white-space: nowrap;
@@ -473,7 +469,7 @@ input::placeholder {
   color: green;
 }
 
-/* 404 Page */
+
 
 .page-not-found-wrapper {
   display: flex;

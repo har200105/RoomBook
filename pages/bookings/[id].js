@@ -15,9 +15,10 @@ const BookingDetailsPage = () => {
     )
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(async ({ req, params, store }) => {
-    const session = await getSession({ req })
+export const getServerSideProps = wrapper.getServerSideProps(
+    async ({ req, params, store }) => {
 
+    const session = await getSession({ req });
     if (!session) {
         return {
             redirect: {

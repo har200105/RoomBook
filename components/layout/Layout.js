@@ -1,9 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-
 import Header from './Header'
-
-
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

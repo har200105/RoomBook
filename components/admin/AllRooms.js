@@ -34,7 +34,7 @@ const AllRooms = () => {
         }
 
         if (isDeleted) {
-            router.push('/admin/rooms')
+            router.push('/admin/rooms');
             dispatch({ type: DELETE_ROOM_RESET })
         }
 

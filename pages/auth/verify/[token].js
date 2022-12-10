@@ -1,7 +1,5 @@
 import React, { useState,useEffect } from 'react'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { signIn } from 'next-auth/client'
 import { toast } from 'react-toastify'
 import ButtonLoader from '../../../components/layout/ButtonLoader'
 import { clearErrors, verifyUser } from '../../../redux/actions/userActions'
