@@ -39,7 +39,7 @@ const Verify = () => {
 
 
     return (
-          <Layout title='User Verify'>
+        <Layout title='User Verify'>
         <div className="container container-fluid">
             <div className="row wrapper">
                 <div className="col-10 col-lg-5">
